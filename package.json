@@ -1,0 +1,33 @@
+{
+  "name": "rssplaylister",
+  "version": "1.0.0",
+  "description": "a playlister for rss feeds with media content",
+  "main": "index.js",
+  "dependencies": {
+    "@types/react": "^15.0.14",
+    "@types/react-dom": "^0.14.23",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "awesome-typescript-loader": "^3.0.8",
+    "source-map-loader": "^0.1.6",
+    "typescript": "^2.2.1"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.0.8",
+    "source-map-loader": "^0.1.6",
+    "typescript": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertKirk/RSSPlaylister.git"
+  },
+  "author": "Robert Kirk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobertKirk/RSSPlaylister/issues"
+  },
+  "homepage": "https://github.com/RobertKirk/RSSPlaylister#readme"
+}
