@@ -6,9 +6,12 @@
   "dependencies": {
     "@types/react": "^15.0.14",
     "@types/react-dom": "^0.14.23",
+    "awesome-typescript-loader": "^3.0.8",
+    "feedparser": "^2.1.0",
+    "jquery": "^3.1.1",
+    "parse-rss": "^1.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "awesome-typescript-loader": "^3.0.8",
     "source-map-loader": "^0.1.6",
     "typescript": "^2.2.1"
   },

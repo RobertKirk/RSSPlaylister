@@ -1,11 +1,12 @@
 import * as React from "react";
 
 interface IFeedInputProps {
-    onInput: (s: string) => void
+    onInput: (name: string, url: string) => void
 }
 
 interface IFeedInputState {
-    input: string
+    name: string,
+    url: string
 }
 
 export class FeedInput extends React.Component<IFeedInputProps, IFeedInputState> {
@@ -13,28 +14,42 @@ export class FeedInput extends React.Component<IFeedInputProps, IFeedInputState>
         super(props);
 
         this.state = {
-            input: ""
+            name: "",
+            url: ""
         }
-        this.inputChange = this.inputChange.bind(this)
+        this.inputNameChange = this.inputNameChange.bind(this)
+        this.inputUrlChange = this.inputUrlChange.bind(this)
     }
 
     public render() {
         return <div className="forinput">
-                <input value={this.state.input} onChange={this.inputChange}/>
+                <p>name the feed</p>
+                <input value={this.state.name} onChange={this.inputNameChange}/>
+                <p> provide url </p>
+                <input value={this.state.url} onChange={this.inputUrlChange}/>
                 <button onClick={() => this.handleSubmit()}>submit</button>
             </div>
     }
 
-    private inputChange(evt: any) {
-        this.setState({
-            input: evt.target.value
-        })
+    private inputNameChange(evt: any) {
+        evt.persist();
+        this.setState(((s: IFeedInputState, p: IFeedInputProps) =>
+            s.name = evt.target.value
+        ));
+    }
+
+    private inputUrlChange(evt: any) {
+        evt.persist();
+        this.setState(((s: IFeedInputState, p: IFeedInputProps) =>
+            s.url = evt.target.value
+        ));
     }
 
     private handleSubmit(): void {
-        this.props.onInput(this.state.input)
+        this.props.onInput(this.state.name, this.state.url)
         this.setState({
-            input: ""
+            name: "",
+            url: ""
         })
     }
 }
