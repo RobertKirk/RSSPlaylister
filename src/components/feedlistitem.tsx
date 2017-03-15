@@ -1,5 +1,4 @@
 import * as React from "react"
-
 import { FeedInfo } from "../helper_classes/feedinfo"
 
 interface IFeedListItemProps {

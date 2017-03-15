@@ -1,7 +1,9 @@
 import * as React from "react";
+import * as request from "request"
 
 import { FeedInfo } from "../helper_classes/feedinfo"
 
+import { Playlister } from "./playlister"
 import { FeedList } from "./feedlist"
 
 interface IMainState {
@@ -11,7 +13,12 @@ interface IMainState {
 export class Main extends React.Component<{}, IMainState> {
     render() {
         return <div>
-            <FeedList feeds={this.getFeeds()} onDelete={this.deleteFeed.bind(this)} onChange={this.changeFeed.bind(this)} onFeedAdd={this.saveInputedFeed.bind(this)}/>
+            <FeedList 
+                feeds={this.getFeeds()} 
+                onDelete={this.deleteFeed.bind(this)} 
+                onChange={this.changeFeed.bind(this)} 
+                onFeedAdd={this.saveInputedFeed.bind(this)}/>
+            <Playlister feeds={[]}/>
             </div>
     }
 
