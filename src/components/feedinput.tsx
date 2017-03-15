@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import { FeedInfo } from "../helper_classes/feedinfo"
+
 interface IFeedInputProps {
-    onInput: (name: string, url: string) => void
+    onInput: (f: FeedInfo) => void
 }
 
 interface IFeedInputState {
@@ -33,20 +35,23 @@ export class FeedInput extends React.Component<IFeedInputProps, IFeedInputState>
 
     private inputNameChange(evt: any) {
         evt.persist();
-        this.setState(((s: IFeedInputState, p: IFeedInputProps) =>
+        this.setState(((s: IFeedInputState) =>
             s.name = evt.target.value
         ));
     }
 
     private inputUrlChange(evt: any) {
         evt.persist();
-        this.setState(((s: IFeedInputState, p: IFeedInputProps) =>
+        this.setState(((s: IFeedInputState) =>
             s.url = evt.target.value
         ));
     }
 
     private handleSubmit(): void {
-        this.props.onInput(this.state.name, this.state.url)
+        var f = new FeedInfo()
+        f.feedName = this.state.name
+        f.feedUrl = this.state.url
+        this.props.onInput(f)
         this.setState({
             name: "",
             url: ""
