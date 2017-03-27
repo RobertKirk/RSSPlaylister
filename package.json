@@ -18,6 +18,7 @@
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
     "rss": "^1.2.2",
+    "rss-parser": "^2.5.2",
     "source-map-loader": "^0.1.6",
     "tls": "0.0.1",
     "typescript": "^2.2.1"

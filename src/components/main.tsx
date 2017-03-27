@@ -18,7 +18,7 @@ export class Main extends React.Component<{}, IMainState> {
                 onDelete={this.deleteFeed.bind(this)} 
                 onChange={this.changeFeed.bind(this)} 
                 onFeedAdd={this.saveInputedFeed.bind(this)}/>
-            <Playlister feeds={[]}/>
+            <Playlister feeds={[]} lastAccess={this.getLastAccess()}/>
             </div>
     }
 
@@ -52,5 +52,11 @@ export class Main extends React.Component<{}, IMainState> {
             })
         }
         return feeds
+    }
+
+    private getLastAccess(): Date {
+        var lastAccess = new Date()
+        lastAccess.setDate(lastAccess.getDate() - 1)
+        return lastAccess
     }
 }
