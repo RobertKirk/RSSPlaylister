@@ -1,18 +1,36 @@
 import * as React from "react"
+import YouTube from "react-youtube"
+
+import { SongInfo } from "../helper_classes/songinfo"
 
 interface ISongItemProps {
-    type: number,
-    url: string
+    song: SongInfo,
+    onEnd: () => void
 }
 
 export class SongItem extends React.Component<ISongItemProps, {}> {
     public render() {
-        if (this.props.type === 0) {
+        if (this.props.song.type === 0) {
+            const opts = {
+                height: '390',
+                width: '640',
+                playerVars: { // https://developers.google.com/youtube/player_parameters 
+                    autoplay: 1
+                }
+            };
             return <div>
-                <iframe width="420" height="315" src={this.props.url + "?autoplay=1&amp;npm installenablejsapi=1"}></iframe>
+                <YouTube 
+                    videoId={this.props.song.urlId} 
+                    opts = {opts}
+                    onReady={this.ytOnReady}
+                    onEnd={this.props.onEnd}/>
                 </div>
         } else {
             return <div>wrong type</div>
         }
+    }
+
+    private ytOnReady(event: any) {
+        event.target.playVideo();
     }
 }
