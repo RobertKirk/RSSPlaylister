@@ -18,7 +18,7 @@ export class Main extends React.Component<{}, IMainState> {
                 onDelete={this.deleteFeed.bind(this)} 
                 onChange={this.changeFeed.bind(this)} 
                 onFeedAdd={this.saveInputedFeed.bind(this)}/>
-            <Playlister feeds={[]} lastAccess={this.getLastAccess()}/>
+            {localStorage.length>0 ? <Playlister feeds={this.getFeeds()} lastAccess={this.getLastAccess()}/> : <p>no feeds yet </p>}
             </div>
     }
 

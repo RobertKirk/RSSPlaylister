@@ -14,32 +14,67 @@ interface IPlaylisterProps {
 }
 
 interface IPlaylisterState {
-    sounds: SongInfo[]
+    sounds: SongInfo[],
+    currentSong: number
 }
 
 export class Playlister extends React.Component<IPlaylisterProps, IPlaylisterState> {
+    constructor(props: IPlaylisterProps) {
+        super(props);
+
+        this.state = {
+            sounds: [],
+            currentSong: 0
+        }
+    }
+
+    public componentWillMount() {
+        this.generateXML()
+    }
+
     public render() {
-        var song = new SongInfo
-        song.type = 0
-        song.urlId = "YcRQ23VOarc"
-        parser(this.generateXML())
         return <div>
-                <SongItem song={song} onEnd={() => console.log("hello")}/>
+                { this.state.sounds.length>0 && this.props.feeds.length>0 ?
+                <SongItem song={this.state.sounds[this.state.currentSong]} onEnd={() => this.nextSong()}/> : <p>not ready yet</p> }
+                <button onClick={this.nextSong.bind(this)} >next Song</button>
+                <button onClick={this.prevSong.bind(this)} >prev Song</button>
             </div>
     }
 
-    private generateXML(): string {
+    private nextSong() {
+        this.setState((s: IPlaylisterState) => {
+            s.currentSong = Math.max(s.currentSong + 1, s.sounds.length -1)
+        })
+    }
+
+    private prevSong() {
+        this.setState((s: IPlaylisterState) => {
+            s.currentSong = Math.max(s.currentSong -1, 0)
+        })
+    }
+
+    private generateXML() {
         request(
-            "http://adhoc.fm/feed/",
+            this.props.feeds[0].feedUrl,
             {   
                 headers: {"Access-Control-Allow-Origin": "*"}
             },
-            function(err, response, body) {
+            function(err: any, response: any, body: any) {
                 rssparser.parseString(body, function(err?: any, res?: any) {
-                    if(res) {console.log(res)}
-            })
-        });
-        return ""
+                    this.setState((s: IPlaylisterState) => {
+                        var sounds: SongInfo[] = res.feed.entries.map((entry: any) => {
+                            return parser(entry.content)
+                        })
+                        s.sounds = sounds.filter((val: SongInfo, i: number, list: SongInfo[]) => {
+                            if (val != null) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                    })
+                }.bind(this))
+            }.bind(this));
     }
 
 }

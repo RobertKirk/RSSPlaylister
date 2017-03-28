@@ -10,7 +10,7 @@ interface ISongItemProps {
 
 export class SongItem extends React.Component<ISongItemProps, {}> {
     public render() {
-        if (this.props.song.type === 0) {
+        if (this.props.song.type == 0) {
             const opts = {
                 height: '390',
                 width: '640',
