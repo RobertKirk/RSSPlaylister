@@ -16,6 +16,7 @@
     "parse-rss": "^1.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-player": "^0.14.3",
     "react-youtube": "^7.3.0",
     "request": "^2.81.0",
     "rss": "^1.2.2",

@@ -1,5 +1,6 @@
 import * as React from "react"
 import YouTube from "react-youtube"
+import ReactPlayer from "react-player"
 
 import { SongInfo } from "../helper_classes/songinfo"
 
@@ -10,6 +11,7 @@ interface ISongItemProps {
 
 export class SongItem extends React.Component<ISongItemProps, {}> {
     public render() {
+        console.log(this)
         if (this.props.song.type == 0) {
             const opts = {
                 height: '390',
@@ -24,6 +26,10 @@ export class SongItem extends React.Component<ISongItemProps, {}> {
                     opts = {opts}
                     onReady={this.ytOnReady}
                     onEnd={this.props.onEnd}/>
+                </div>
+        } else if (this.props.song.type == 1) {
+            return <div>
+                <audio src={this.props.song.urlId} onEnded={() => this.props.onEnd()}/>
                 </div>
         } else {
             return <div>wrong type</div>

@@ -36,14 +36,14 @@ export class Playlister extends React.Component<IPlaylisterProps, IPlaylisterSta
         return <div>
                 { this.state.sounds.length>0 && this.props.feeds.length>0 ?
                 <SongItem song={this.state.sounds[this.state.currentSong]} onEnd={() => this.nextSong()}/> : <p>not ready yet</p> }
-                <button onClick={this.nextSong.bind(this)} >next Song</button>
-                <button onClick={this.prevSong.bind(this)} >prev Song</button>
+                <button onClick={this.prevSong.bind(this)}>prev Song</button>
+                <button onClick={this.nextSong.bind(this)}>next Song</button>
             </div>
     }
 
     private nextSong() {
         this.setState((s: IPlaylisterState) => {
-            s.currentSong = Math.max(s.currentSong + 1, s.sounds.length -1)
+            s.currentSong = Math.min(s.currentSong + 1, s.sounds.length -1)
         })
     }
 
@@ -65,6 +65,7 @@ export class Playlister extends React.Component<IPlaylisterProps, IPlaylisterSta
                         var sounds: SongInfo[] = res.feed.entries.map((entry: any) => {
                             return parser(entry.content)
                         })
+                        console.log(sounds)
                         s.sounds = sounds.filter((val: SongInfo, i: number, list: SongInfo[]) => {
                             if (val != null) {
                                 return true

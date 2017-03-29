@@ -5,8 +5,13 @@ export function parser(s: string): SongInfo {
     var tester: RegExp = /iframe/i
     var searcher1: RegExp = /src=/
     var searcher2: RegExp = /"/
+    
     var ytsearcher: RegExp = /youtube/i
+    
     var scsearcher: RegExp = /soundcloud/i
+    var scsearcher2: RegExp = /api[.]soundcloud/
+    var scsearcher3: RegExp = /&amp/
+
     var bcsearcher: RegExp = /bandcamp/i
     if (tester.test(s)) {
         var cut: string = s.substr(s.search(tester))
@@ -18,6 +23,8 @@ export function parser(s: string): SongInfo {
             song.urlId = song.urlId.substr(30)
         } else if (scsearcher.test(cut)) {
             song.type = 1
+            song.urlId = "http://" + song.urlId.slice(0, song.urlId.search(scsearcher3)).substr(song.urlId.search(scsearcher2))
+            console.log(song)
         } else if (bcsearcher.test(cut)) {
             song.type = 2
         } else {
