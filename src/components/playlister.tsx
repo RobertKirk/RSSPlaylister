@@ -65,7 +65,6 @@ export class Playlister extends React.Component<IPlaylisterProps, IPlaylisterSta
                         var sounds: SongInfo[] = res.feed.entries.map((entry: any) => {
                             return parser(entry.content)
                         })
-                        console.log(sounds)
                         s.sounds = sounds.filter((val: SongInfo, i: number, list: SongInfo[]) => {
                             if (val != null) {
                                 return true

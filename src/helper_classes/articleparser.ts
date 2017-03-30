@@ -9,8 +9,8 @@ export function parser(s: string): SongInfo {
     var ytsearcher: RegExp = /youtube/i
     
     var scsearcher: RegExp = /soundcloud/i
-    var scsearcher2: RegExp = /api[.]soundcloud/
-    var scsearcher3: RegExp = /&amp/
+    // var scsearcher2: RegExp = /api[.]soundcloud/
+    // var scsearcher3: RegExp = /&amp/
 
     var bcsearcher: RegExp = /bandcamp/i
     if (tester.test(s)) {
@@ -23,8 +23,8 @@ export function parser(s: string): SongInfo {
             song.urlId = song.urlId.substr(30)
         } else if (scsearcher.test(cut)) {
             song.type = 1
-            song.urlId = "http://" + song.urlId.slice(0, song.urlId.search(scsearcher3)).substr(song.urlId.search(scsearcher2))
-            console.log(song)
+            song.urlId = song.urlId.replace("auto_play=false", "auto_play=true")
+            // song.urlId = "http://" + song.urlId.slice(0, song.urlId.search(scsearcher3)).substr(song.urlId.search(scsearcher2))
         } else if (bcsearcher.test(cut)) {
             song.type = 2
         } else {
